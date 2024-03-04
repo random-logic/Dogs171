@@ -2,8 +2,10 @@
 
 commands to run in /backend folder:
 
-install reqirements:
+install requirements:
+
 `pip install -r requirements.txt`
 
-spin up backend using:
+spin up backend:
+
 `uvicorn main:app --reload`
