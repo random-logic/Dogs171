@@ -4,6 +4,10 @@ import base64
 from PIL import Image
 from io import BytesIO
 
+import model as MLModel
+
+model = MLModel()
+
 app = FastAPI()
 
 origins = [
@@ -20,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-IMAGE_SIZE = 244
+IMAGE_SIZE = 224
 
 @app.post("/")
 async def process_image(base64_image: str = Form(...)):
@@ -34,7 +38,7 @@ async def process_image(base64_image: str = Form(...)):
 def model_response(resized_image: Image.Image) -> str:
     # feed image into model
     # return model response for breed type
-    return "doggy"
+    return model.predict(resized_image)
 
 
 if __name__ == "__main__":
