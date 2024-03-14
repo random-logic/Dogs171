@@ -1,18 +1,24 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
-    return {"message": "Hello, World!"}
-
-
-@app.get("/answer/{image_id}")
-def get_model_answer(image_id: int, q: str = None):
-    answer = "cat"
-    return {"answer": answer, "q": q}
-
+    return {"doggy"}
 
 if __name__ == "__main__":
     import uvicorn

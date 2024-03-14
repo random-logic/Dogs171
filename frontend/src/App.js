@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { Button } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { Loader } from "@mantine/core";
 
 function MyComponent() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [loading, setLoading] = useState(false);
-  // TODO: set this state to whatever the model returns
   const [answer, setAnswer] = useState(null);
 
-  // Function to handle file selection
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("image/")) {
@@ -23,20 +20,32 @@ function MyComponent() {
     }
   };
 
-  // TODO: function to invoke model
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const jsonData = await response.json();
+      console.log(jsonData);
+      return jsonData;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const classifyImage = () => {
-    setTimeout(() => {
-      setAnswer("Golder retriever");
+    setTimeout(async () => {
+      const response = await fetchData();
+      setAnswer(response);
       setLoading(false);
     }, 1000);
   };
 
   return (
     <Grid container justifyContent="center" spacing={2}>
-      {/* First row */}
       <Grid item xs={12}>
         <Box textAlign="center" p={2}>
-          {/* Content for the first row */}
           <div>
             <h2>
               Welcome to dog classifier! Upload a picture of a dog below and we
@@ -46,13 +55,10 @@ function MyComponent() {
         </Box>
       </Grid>
 
-      {/* Second row */}
       <Grid item xs={12}>
         <Box maxWidth="100vw" display="flex" justifyContent="center" p={2}>
-          {/* Parent container for the two boxes */}
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={6}>
-              {/* First box with background color */}
               <Box
                 p={2}
                 textAlign="center"
@@ -68,7 +74,6 @@ function MyComponent() {
                 {selectedImage === null ? (
                   <h3>No image uploaded yet.</h3>
                 ) : null}
-                {/* Show the picture in the box only if its been uploaded */}
                 {selectedImage && (
                   <img
                     src={selectedImage}
@@ -122,7 +127,6 @@ function MyComponent() {
               </Box>
             </Grid>
             <Grid item xs={6}>
-              {/* Second box with background color */}
               <Box
                 p={2}
                 textAlign="center"
