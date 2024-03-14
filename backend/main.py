@@ -18,6 +18,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
+
 @app.post("/")
 async def process_image(base64_image: str = Form(...)):
     # Decode the Base64-encoded image data
