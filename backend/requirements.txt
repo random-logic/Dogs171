@@ -12,3 +12,5 @@ scikit-learn
 vit_keras
 tensorflow_addons
 opencv-python
+scikeras
+TensorFlow
