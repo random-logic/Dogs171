@@ -1,6 +1,7 @@
 # For API
 fastapi==0.68.0
 uvicorn==0.15.0
+python-multipart
 
 # For yoinking images
 pandas

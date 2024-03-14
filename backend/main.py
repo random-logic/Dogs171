@@ -1,5 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+import base64
+from PIL import Image
+from io import BytesIO
 
 app = FastAPI()
 
@@ -15,10 +18,13 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
+@app.post("/")
+async def process_image(base64_image: str = Form(...)):
+    # Decode the Base64-encoded image data
+    decoded_image_data = base64.b64decode(base64_image)
 
-@app.get("/")
-def read_root():
-    return {"doggy"}
+    image = Image.open(BytesIO(decoded_image_data))
+    return {"breed": "doggy"}
 
 if __name__ == "__main__":
     import uvicorn
