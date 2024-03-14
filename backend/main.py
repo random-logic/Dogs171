@@ -9,6 +9,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "http://localhost:8000",
 ]
 
 app.add_middleware(
@@ -25,7 +26,7 @@ IMAGE_SIZE = 244
 async def process_image(base64_image: str = Form(...)):
     decoded_image_data = base64.b64decode(base64_image)
     image = Image.open(BytesIO(decoded_image_data))
-    resized_image = image.resize(IMAGE_SIZE)
+    resized_image = image.resize((IMAGE_SIZE, IMAGE_SIZE))
 
     breed = model_response(resized_image)
     return {"breed": breed}
