@@ -11,7 +11,7 @@ class MLModel:
         with open('pca.pkl', 'rb') as f:
             self.pca = pickle.load(f)
 
-        self.loaded_model = load_model('')
+        self.loaded_model = load_model('FFNN_model.h5')
 
         # Load VGG16 model without top layers
         vgg16 = VGG16(weights='imagenet', include_top=True, classifier_activation=None)
