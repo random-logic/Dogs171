@@ -40,14 +40,10 @@ async def process_image(base64_image: str = Form(...)):
     return {"breed": breed}
 
 def model_response(resized_image: Image.Image) -> str:
-<<<<<<< Updated upstream
     # feed image into model
     # return model response for breed type
-    return model.predict(resized_image)
-=======
     prediction = model.predict(resized_image)
     return prediction
->>>>>>> Stashed changes
 
 
 if __name__ == "__main__":
