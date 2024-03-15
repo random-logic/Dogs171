@@ -3,13 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import base64
 from PIL import Image
 from io import BytesIO
-import pickle
 
-# Load the trained model
-with open('./Stanford/FFNN_model.pkl', 'rb') as file:
-    model = pickle.load(file)
-
-import model as MLModel
+from model import MLModel
 
 model = MLModel()
 

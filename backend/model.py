@@ -7,12 +7,13 @@ from PIL import Image
 import numpy as np
 import pickle
 
-class Model:
+class MLModel:
     def __init__(self):
-        with open('pca.pkl', 'r') as f:
+        with open('pca.pkl', 'rb') as f:
             self.pca = pickle.load(f)
-        with open('FFNN_model.pkl', 'r') as f:
-            self.nn = pickle.load(f)
+
+        with open('FFNN_model.pkl', 'rb') as f:
+            self.loaded_model = pickle.load(f)
 
         # Load VGG16 model without top layers
         vgg16 = VGG16(weights='imagenet', include_top=True, classifier_activation=None)
@@ -32,6 +33,6 @@ class Model:
     def predict(self, img: Image.Image) -> str:
         features = self.get_features(img)
         features = self.pca.transform(features)
-        predictions = self.nn.predict(features)
+        predictions = self.loaded_model.predict(features)
 
         raise "not done implementing predict"

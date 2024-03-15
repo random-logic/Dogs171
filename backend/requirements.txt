@@ -4,13 +4,10 @@ uvicorn==0.15.0
 python-multipart
 
 # For yoinking images
-pandas
 Pillow
 
 # For model
 scikit-learn
-vit_keras
-tensorflow_addons
-opencv-python
 scikeras
-TensorFlow
+keras
+tensorflow
