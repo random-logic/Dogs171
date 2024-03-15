@@ -37,8 +37,7 @@ async def process_image(base64_image: str = Form(...)):
 def model_response(resized_image: Image.Image) -> str:
     # feed image into model
     # return model response for breed type
-    prediction = model.predict(resized_image)
-    return prediction
+    return model.predict(resized_image)
 
 
 if __name__ == "__main__":

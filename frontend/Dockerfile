@@ -1,4 +1,5 @@
 FROM node:latest
-WORKDIR ~
-COPY package.json .
+WORKDIR /home/user
+COPY . .
 RUN npm install
+CMD ["npm", "start"]
