@@ -1,9 +1,8 @@
-from keras.models import Sequential
+from keras.models import Sequential, load_model
 from keras.layers import Flatten
 from keras.applications import VGG16
 from sklearn.decomposition import PCA
 from PIL import Image
-
 import numpy as np
 import pickle
 
@@ -12,8 +11,7 @@ class MLModel:
         with open('pca.pkl', 'rb') as f:
             self.pca = pickle.load(f)
 
-        with open('FFNN_model.pkl', 'rb') as f:
-            self.loaded_model = pickle.load(f)
+        self.loaded_model = load_model('')
 
         # Load VGG16 model without top layers
         vgg16 = VGG16(weights='imagenet', include_top=True, classifier_activation=None)
