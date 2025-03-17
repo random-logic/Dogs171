@@ -1,3 +1,8 @@
+# Dog Breed Image Classification
+What does it do:
+* It classifies dog based on breed using state of the art CNNs and NN head
+* It accurately classifies 95% of the breeds
+
 # How to run our app
 1. Run backend:
    a. From root of this repo path, do `cd backend`
